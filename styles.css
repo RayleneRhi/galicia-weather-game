@@ -1,0 +1,470 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 100%);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+#game-header {
+    background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+
+#game-header h1 {
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+#score-display {
+    font-size: 1.3rem;
+    font-weight: bold;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+#controls {
+    display: flex;
+    gap: 10px;
+}
+
+#controls button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+#start-btn {
+    background: #FFD700;
+    color: #333;
+}
+
+#start-btn:hover {
+    background: #FFA500;
+    transform: scale(1.05);
+}
+
+#end-btn {
+    background: #DC143C;
+    color: white;
+}
+
+#end-btn:hover {
+    background: #B22222;
+    transform: scale(1.05);
+}
+
+/* Game Field */
+#game-field {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(to bottom, #90EE90 0%, #228B22 70%, #006400 100%);
+    overflow: hidden;
+}
+
+/* Hills background */
+.hill {
+    position: absolute;
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient(to bottom, #32CD32, #228B22);
+}
+
+.hill-1 {
+    width: 600px;
+    height: 200px;
+    bottom: -50px;
+    left: -100px;
+    z-index: 1;
+}
+
+.hill-2 {
+    width: 800px;
+    height: 250px;
+    bottom: -80px;
+    left: 200px;
+    z-index: 1;
+}
+
+.hill-3 {
+    width: 500px;
+    height: 150px;
+    bottom: -30px;
+    right: -50px;
+    z-index: 1;
+}
+
+/* Weather elements */
+.weather-element {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    transition: opacity 0.3s;
+}
+
+.weather-element.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Sun */
+.sun {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #FFD700 0%, #FFA500 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #FFD700, 0 0 100px #FFA500;
+    animation: sunPulse 2s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Rain cloud */
+.cloud {
+    width: 150px;
+    height: 80px;
+    background: linear-gradient(to bottom, #696969, #2F4F4F);
+    border-radius: 50px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 70px;
+    height: 70px;
+    top: -35px;
+    left: 20px;
+}
+
+.cloud::after {
+    width: 90px;
+    height: 90px;
+    top: -45px;
+    right: 20px;
+}
+
+.rain-lines {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 60px;
+}
+
+.rain-lines::before,
+.rain-lines::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: #4169E1;
+    animation: rainFall 0.5s linear infinite;
+}
+
+.rain-lines::before {
+    left: 20px;
+    animation-delay: 0s;
+}
+
+.rain-lines::after {
+    left: 60px;
+    animation-delay: 0.2s;
+}
+
+@keyframes rainFall {
+    0% { transform: translateY(-20px); opacity: 1; }
+    100% { transform: translateY(60px); opacity: 0; }
+}
+
+/* Octopus */
+#octopus {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 60;
+    text-align: center;
+}
+
+.octopus-body {
+    font-size: 4rem;
+    animation: octopusFloat 3s ease-in-out infinite;
+}
+
+.octopus-label {
+    font-size: 0.8rem;
+    color: #2E8B57;
+    font-weight: bold;
+    background: rgba(255,255,255,0.8);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+@keyframes octopusFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Arrival zones */
+.arrival-zone {
+    position: absolute;
+    bottom: 10px;
+    width: 150px;
+    height: 120px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    border: 3px dashed rgba(255,255,255,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 40;
+}
+
+#arrival-europe {
+    left: 10px;
+}
+
+#arrival-morocco {
+    right: 10px;
+}
+
+.train, .boat {
+    font-size: 2.5rem;
+}
+
+.zone-label {
+    font-size: 0.7rem;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin: 5px 0;
+    text-align: center;
+}
+
+.waiting-character {
+    font-size: 2rem;
+    margin: 5px 0;
+}
+
+.take-btn {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    background: #FFD700;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.take-btn:hover {
+    background: #FFA500;
+}
+
+/* Characters */
+#characters-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 30;
+}
+
+.character {
+    position: absolute;
+    width: 50px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.1s;
+}
+
+.character-body {
+    width: 30px;
+    height: 45px;
+    border-radius: 15px 15px 5px 5px;
+    position: relative;
+}
+
+.character-head {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-bottom: -5px;
+    z-index: 2;
+}
+
+/* European character colors */
+.character.european .character-body {
+    background: linear-gradient(135deg, #4169E1, #1E90FF);
+}
+
+.character.european .character-head {
+    background: #FFE4C4;
+}
+
+/* Moroccan character colors */
+.character.moroccan .character-body {
+    background: linear-gradient(135deg, #CD853F, #D2691E);
+}
+
+.character.moroccan .character-head {
+    background: #D2B48C;
+}
+
+/* Umbrella */
+.umbrella {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.umbrella::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    background: #DC143C;
+    border-radius: 20px 20px 0 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.umbrella::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 15px;
+    background: #333;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.character.european .umbrella::before {
+    background: #1E90FF;
+}
+
+.character.moroccan .umbrella::before {
+    background: #CD853F;
+}
+
+/* HP Bar */
+.hp-bar-container {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.hp-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, #DC143C, #32CD32);
+    transition: width 0.2s;
+}
+
+.hp-value {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    z-index: 5;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+/* Frozen state */
+.character.frozen {
+    opacity: 0.7;
+}
+
+.character.frozen::after {
+    content: '❄️';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1rem;
+}
+
+/* Emigration message */
+#emigration-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #8B4513;
+    background: rgba(255,255,255,0.9);
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: 3px solid #8B4513;
+    z-index: 200;
+    text-align: center;
+    animation: fadeInOut 2s forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+/* Hidden utility class */
+.hidden {
+    display: none !important;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galicia Weather Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <header id="game-header">
+            <h1>🌧️ Galicia Weather Manager ☀️</h1>
+            <div id="score-display">Score: <span id="score-value">0</span></div>
+            <div id="controls">
+                <button id="start-btn">Start Game</button>
+                <button id="end-btn">End Game</button>
+            </div>
+        </header>
+
+        <div id="game-field">
+            <!-- Background scenery -->
+            <div class="hill hill-1"></div>
+            <div class="hill hill-2"></div>
+            <div class="hill hill-3"></div>
+            
+            <!-- Weather elements -->
+            <div id="weather-sun" class="weather-element hidden">
+                <div class="sun"></div>
+            </div>
+            <div id="weather-rain" class="weather-element hidden">
+                <div class="cloud"></div>
+                <div class="rain-lines"></div>
+            </div>
+
+            <!-- Octopus bonus -->
+            <div id="octopus" class="hidden">
+                <div class="octopus-body">🐙</div>
+                <div class="octopus-label">Galicia Economy Bonus!</div>
+            </div>
+
+            <!-- Arrival zones -->
+            <div id="arrival-europe" class="arrival-zone">
+                <div class="train">🚂</div>
+                <div class="zone-label">Eastern Europe</div>
+                <div id="europe-waiting" class="waiting-character hidden"></div>
+                <button id="take-europe-btn" class="take-btn hidden">Take (50 pts)</button>
+            </div>
+            <div id="arrival-morocco" class="arrival-zone">
+                <div class="boat">⛵</div>
+                <div class="zone-label">Morocco</div>
+                <div id="morocco-waiting" class="waiting-character hidden"></div>
+                <button id="take-morocco-btn" class="take-btn hidden">Take (50 pts)</button>
+            </div>
+
+            <!-- Characters container -->
+            <div id="characters-container"></div>
+
+            <!-- Emigration message overlay -->
+            <div id="emigration-message" class="hidden">
+                Emigrated to Argentina
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
